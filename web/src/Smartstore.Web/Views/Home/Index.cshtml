@@ -1,0 +1,70 @@
+﻿@{
+    Assets.BodyAttributes.AppendCssClass("home");
+    Assets.AppendTitleParts((string)ViewBag.MetaTitle);
+    Assets.AppendMetaDescriptionParts((string)ViewBag.MetaDescription);
+    Assets.AppendMetaKeywordsParts((string)ViewBag.MetaKeywords);
+}
+
+<div class="page home-page">
+<div class="slick-slider homebanner" style="display:none">
+  <div class="element element-1"><img src="~/images/banner1.jpg"/></div>
+        <div class="element element-1"><img src="~/images/banner2.jpg" /></div>
+        <div class="element element-1"><img src="~/images/banner3.jpg" /></div>
+</div>
+
+    <div class="page-body homeback">
+    <div class="container">
+        <zone name="home_page_top" /> 
+
+       
+        <zone name="home_page_after_intro" />
+
+        
+
+        
+        @await Component.InvokeAsync("HomeCategories")
+        <zone name="home_page_after_categories" />
+        
+        <div class="hometeaser">
+           <div class="row">
+                <div class="col-md-4">
+                    <img src="~/images/img_teaser1.png" alt="" class="img-fluid mb-2" />
+                </div>
+                 <div class="col-md-4">
+                    <img src="~/images/img_teaser2.png" alt="" class="img-fluid mb-2" />
+                </div>
+                 <div class="col-md-4">
+                    <img src="~/images/img_teaser3.png" alt="" class="img-fluid mb-2" />
+                </div>
+           </div>
+        </div>
+        </div>
+
+        <div class="featuredproducts">
+            <div class="container">
+            @await Component.InvokeAsync("HomeProducts")
+            <zone name="home_page_after_products" />
+            </div>
+        </div>
+
+        <div class="container">
+            @await Component.InvokeAsync("HomeBestsellers")
+            <zone name="home_page_after_bestsellers" />
+
+            @await Component.InvokeAsync("HomeBrands")
+            <zone name="home_page_after_manufacturers" />
+
+            @await Component.InvokeAsync("PopularProductTags")
+            <zone name="home_page_after_tags" />
+
+            @* TODO: (mc) find more intelligent way of rendering RecentlyViewedProducts globally *@
+          @*  @await Component.InvokeAsync("RecentlyViewedProducts")*@
+
+            @await Component.InvokeAsync("TopicBlock", new { systemName = "HomePageText", isLead = true })
+
+            <zone name="home_page_bottom" />
+        </div>
+    </div>
+</div>
+</div>
+

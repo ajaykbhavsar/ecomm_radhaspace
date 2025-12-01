@@ -1,0 +1,36 @@
+﻿@using Smartstore.Web.Models.Checkout
+
+@model List<CheckoutProgressStepModel>
+
+@{
+    // 2:16.6% 3:25% 4:33.3%
+    var cols = Model.Count == 4 ? 3 : (Model.Count >= 5 ? 2 : 4);
+}
+
+<zone name="checkout_steps_before" />
+
+<nav aria-label="@T("Aria.Label.CheckoutProcess")">
+    <div class="costeps row g-0 mx-auto" role="list">
+        @foreach (var step in Model)
+        {
+            var isNavigatable = step.Visited || step.Active;
+            var stateLabel = step.Visited ? T("Aria.Label.CheckoutStep.Visited").Value : step.Active 
+                ? T("Aria.Label.CheckoutStep.Current").Value : T("Aria.Label.CheckoutStep.Pending").Value;
+
+            <div class="costep col-@cols @step.StateClass" data-step="@step.Name" role="listitem">
+                <a class="costep-link"
+                   attr-class='(!isNavigatable, "disabled")'
+                   attr-aria-disabled='(!isNavigatable, "true")'
+                   attr-tabindex='(!isNavigatable, "-1")'
+                   attr-aria-current='(step.Active, "step")'
+                   href="@(step.Visited || step.Active ? step.Url : "#")">
+                    <i class="costep-icon" aria-hidden="true"></i>
+                    <span class="costep-label">@step.Label</span>
+                    <span class="sr-only">@stateLabel</span>
+                </a>
+            </div>
+        }
+    </div>
+</nav>
+
+<zone name="checkout_steps_after" />
