@@ -1,0 +1,3 @@
+AppVersion: 6.2.0.0
+DataProvider: SqlServer
+DataConnectionString: Data Source=tcp:radhaspace.database.windows.net,1433;Initial Catalog=radhaspacedb;Integrated Security=False;User ID=CloudSAca2e9dc3;Password=Mangoman@170388;Enlist=False;Pooling=True;Min Pool Size=1;Max Pool Size=1024;Multiple Active Result Sets=True;Encrypt=False;User Instance=False;MultipleActiveResultSets=True
